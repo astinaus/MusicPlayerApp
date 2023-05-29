@@ -62,6 +62,12 @@ const songs = [
     cover: 'assets/8.jpg',
     artist: '윤딴딴',
   },
+  {
+    path: 'assets/9.mp3',
+    displayName: '오늘',
+    cover: 'assets/9.jpg',
+    artist: '오왠(O.WHEN)',
+  },
 ];
 
 let musicIndex = 0;
