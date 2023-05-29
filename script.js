@@ -44,9 +44,28 @@ const songs = [
     cover: 'assets/5.jpg',
     artist: 'PATEKO, Kid Wine',
   },
+  {
+    path: 'assets/6.mp3',
+    displayName: '백야',
+    cover: 'assets/6.jpg',
+    artist: '짙은',
+  },
+  {
+    path: 'assets/7.mp3',
+    displayName: '등대',
+    cover: 'assets/7.jpg',
+    artist: '하현상',
+  },
+  {
+    path: 'assets/8.mp3',
+    displayName: '니가 보고 싶은 밤',
+    cover: 'assets/8.jpg',
+    artist: '윤딴딴',
+  },
 ];
 
 let musicIndex = 0;
+let volume = 0.5;
 let isPlaying = false;
 
 function togglePlay() {
@@ -81,7 +100,7 @@ function loadMusic(song) {
   artist.textContent = song.artist;
   image.src = song.cover;
   background.src = song.cover;
-  music.volume = 0.5;
+  music.volume = volume;
 }
 
 function changeMusic(direction) {
@@ -97,9 +116,10 @@ function updateProgressBar() {
   progress.style.width = `${progressPercent}%`;
 
   const formatTime = (time) => String(Math.floor(time)).padStart(2, '0');
-  durationEl.textContent = `${formatTime(duration / 60)}:${formatTime(
-    duration % 60
-  )}`;
+  durationEl.textContent =
+    `${formatTime(duration / 60)}:${formatTime(duration % 60)}` === 'NaN:NaN'
+      ? '00:00'
+      : `${formatTime(duration / 60)}:${formatTime(duration % 60)}`;
   currentTimeEl.textContent = `${formatTime(currentTime / 60)}:${formatTime(
     currentTime % 60
   )}`;
@@ -112,7 +132,8 @@ function setProgressBar(e) {
 }
 
 function volumeControl(e) {
-  music.volume = e.target.value / 1000;
+  volume = e.target.value / 1000;
+  music.volume = volume;
 }
 
 playBtn.addEventListener('click', togglePlay);
