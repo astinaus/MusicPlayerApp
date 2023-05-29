@@ -233,7 +233,6 @@ function genRandomIndex() {
   if (isPlay.size === songs.length) {
     isPlay.clear();
   }
-  console.log(isPlay);
   if (isPlay.has(randomIndex)) {
     return genRandomIndex();
   } else {
