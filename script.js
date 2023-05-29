@@ -1,4 +1,5 @@
 const image = document.getElementById('cover'),
+  container = document.querySelector('.container'),
   title = document.getElementById('music-title'),
   artist = document.getElementById('music-artist'),
   currentTimeEl = document.getElementById('current-time'),
@@ -70,6 +71,53 @@ const songs = [
   },
 ];
 
+// PlayList //
+
+const list = document.getElementById('list');
+const playList = document.querySelector('#play-list');
+
+list.addEventListener('click', () => {
+  playList.classList.toggle('active');
+  container.classList.toggle('active');
+});
+
+const renderPlayList = () => {
+  const frag = document.createDocumentFragment();
+  const ul = document.createElement('ul');
+  ul.className = 'play-list';
+
+  songs.forEach((song) => {
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+
+    song.artist = song.artist;
+    song.displayName = song.displayName;
+
+    // if (music.src.includes(song.path)) {
+    //   li.classList.add('now');
+    // }
+
+    span.innerHTML = `${song.artist} - ${song.displayName}`;
+    li.appendChild(span);
+    ul.appendChild(li);
+  });
+
+  frag.appendChild(ul);
+  playList.appendChild(frag);
+};
+
+renderPlayList();
+
+const playListItems = document.querySelectorAll('.play-list li');
+
+playListItems.forEach((item, index) => {
+  item.addEventListener('click', () => {
+    musicIndex = index;
+    loadMusic(songs[musicIndex]);
+    playMusic();
+  });
+});
+
 let musicIndex = 0;
 let volume = 0.5;
 let isPlaying = false;
@@ -107,6 +155,12 @@ function loadMusic(song) {
   image.src = song.cover;
   background.src = song.cover;
   music.volume = volume;
+
+  playListItems.forEach((item, index) => {
+    musicIndex === index
+      ? item.classList.add('now')
+      : item.classList.remove('now');
+  });
 }
 
 function changeMusic(direction) {

@@ -20,6 +20,13 @@ body {
   justify-content: center;
 }
 
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .a11y-hidden {
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
@@ -37,7 +44,7 @@ body {
   height: 200%;
   top: -50%;
   left: -50%;
-  z-index: -1;
+  z-index: -2;
 }
 
 .background img {
@@ -58,6 +65,7 @@ body {
   border-radius: 20px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   transition: all 0.5s ease;
+  position: relative;
 }
 
 .container:hover {
@@ -194,4 +202,51 @@ body {
   border-radius: 50%;
   background: #272727;
   cursor: pointer;
+}
+
+.fa-list {
+  position: absolute;
+  right: 20px;
+  bottom: 50px;
+}
+
+.container.list-cont {
+  position: absolute;
+  z-index: -3;
+  transition: all 0.5s ease;
+}
+
+.container.list-cont.active {
+  z-index: 0;
+  transform: translateX(250px);
+}
+
+.container.active {
+  transform: translateX(-200px);
+}
+
+.play-list {
+  padding: 20px;
+}
+
+.play-list li {
+  font-size: 15px;
+  border: 2px solid #999;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.play-list li:hover {
+  background-color: #999;
+  color: #fff;
+}
+
+.play-list li + li {
+  margin-top: 10px;
+}
+
+.play-list li.now {
+  background-color: gold;
+  font-weight: 700;
 }
