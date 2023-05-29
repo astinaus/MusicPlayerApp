@@ -71,6 +71,12 @@ const songs = [
     cover: 'assets/9.jpg',
     artist: '오왠(O.WHEN)',
   },
+  {
+    path: 'assets/10.mp3',
+    displayName: '마음이 그래',
+    cover: 'assets/10.jpg',
+    artist: '개코, 권진아',
+  },
 ];
 
 let isPlay = new Set();
