@@ -212,6 +212,11 @@ li {
   position: absolute;
   z-index: -3;
   transition: all 0.5s ease;
+  overflow-y: scroll;
+}
+
+.container.list-cont::-webkit-scrollbar {
+  display: none;
 }
 
 .container.list-cont.active {
