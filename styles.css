@@ -210,9 +210,10 @@ li {
 
 .container.list-cont {
   position: absolute;
-  z-index: -3;
+  z-index: -2;
   transition: all 0.5s ease;
   overflow-y: scroll;
+  box-shadow: none;
 }
 
 .container.list-cont::-webkit-scrollbar {
@@ -221,6 +222,7 @@ li {
 
 .container.list-cont.active {
   z-index: 0;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   transform: translateX(250px);
 }
 
