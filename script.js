@@ -117,6 +117,7 @@ const playListItems = document.querySelectorAll('.play-list li');
 playListItems.forEach((item, index) => {
   item.addEventListener('click', () => {
     musicIndex = index;
+    isPlay.add(musicIndex);
     loadMusic(songs[musicIndex]);
     playMusic();
   });
