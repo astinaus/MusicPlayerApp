@@ -9,6 +9,8 @@ const image = document.getElementById('cover'),
   prevBtn = document.getElementById('prev'),
   nextBtn = document.getElementById('next'),
   playBtn = document.getElementById('play'),
+  repeatBtn = document.getElementById('repeat'),
+  shuffleBtn = document.getElementById('shuffle'),
   volMeter = document.getElementById('volume-meter'),
   background = document.getElementById('bg-img');
 
@@ -71,6 +73,8 @@ const songs = [
   },
 ];
 
+let isPlay = new Set();
+
 // PlayList //
 
 const list = document.getElementById('list');
@@ -121,6 +125,7 @@ playListItems.forEach((item, index) => {
 let musicIndex = 0;
 let volume = 0.5;
 let isPlaying = false;
+let isShuffle = false;
 
 function togglePlay() {
   if (isPlaying) {
@@ -156,6 +161,8 @@ function loadMusic(song) {
   background.src = song.cover;
   music.volume = volume;
 
+  if (isPlay.size === 0) isPlay.add(musicIndex);
+
   playListItems.forEach((item, index) => {
     musicIndex === index
       ? item.classList.add('now')
@@ -165,8 +172,13 @@ function loadMusic(song) {
 
 function changeMusic(direction) {
   musicIndex = (musicIndex + direction + songs.length) % songs.length;
-
-  loadMusic(songs[musicIndex]);
+  if (isShuffle) {
+    musicIndex = genRandomIndex();
+    loadMusic(songs[musicIndex]);
+  } else {
+    loadMusic(songs[musicIndex]);
+  }
+  isPlay.add(musicIndex);
   playMusic();
 }
 
@@ -196,6 +208,39 @@ function volumeControl(e) {
   music.volume = volume;
 }
 
+function handleRepeat() {
+  if (music.loop) {
+    music.loop = false;
+    repeatBtn.classList.remove('active');
+  } else {
+    music.loop = true;
+    repeatBtn.classList.add('active');
+  }
+}
+
+function handleShuffle() {
+  if (isShuffle) {
+    isShuffle = false;
+    shuffleBtn.classList.remove('active');
+  } else {
+    isShuffle = true;
+    shuffleBtn.classList.add('active');
+  }
+}
+
+function genRandomIndex() {
+  let randomIndex = Math.floor(Math.random() * songs.length);
+  if (isPlay.size === songs.length) {
+    isPlay.clear();
+  }
+  console.log(isPlay);
+  if (isPlay.has(randomIndex)) {
+    return genRandomIndex();
+  } else {
+    return randomIndex;
+  }
+}
+
 playBtn.addEventListener('click', togglePlay);
 prevBtn.addEventListener('click', () => changeMusic(-1));
 nextBtn.addEventListener('click', () => changeMusic(1));
@@ -203,5 +248,7 @@ music.addEventListener('ended', () => changeMusic(1));
 music.addEventListener('timeupdate', updateProgressBar);
 playerProgress.addEventListener('click', setProgressBar);
 volMeter.addEventListener('input', volumeControl);
+repeatBtn.addEventListener('click', handleRepeat);
+shuffleBtn.addEventListener('click', handleShuffle);
 
 loadMusic(songs[musicIndex]);

@@ -60,7 +60,7 @@ li {
 
 .container {
   background-color: #e7e7e7;
-  height: 530px;
+  height: 540px;
   width: 400px;
   border-radius: 20px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
@@ -167,12 +167,16 @@ li {
 .slide-container {
   width: 90%;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .slider {
   appearance: none;
   -webkit-appearance: none;
-  width: 100%;
+  width: 50%;
   height: 5px;
   border-radius: 5px;
   background: #d3d3d3;
@@ -202,12 +206,6 @@ li {
   border-radius: 50%;
   background: #272727;
   cursor: pointer;
-}
-
-.fa-list {
-  position: absolute;
-  right: 20px;
-  bottom: 50px;
 }
 
 .container.list-cont {
@@ -249,4 +247,9 @@ li {
 .play-list li.now {
   background-color: gold;
   font-weight: 700;
+}
+
+.fa-shuffle.active,
+.fa-repeat.active {
+  color: salmon;
 }
