@@ -133,14 +133,15 @@ body {
 .player-controls {
   position: relative;
   top: -15px;
-  left: 125px;
-  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
 .fa-solid {
   font-size: 30px;
   color: #666;
-  margin-right: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
   user-select: none;
