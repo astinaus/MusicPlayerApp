@@ -214,6 +214,7 @@ li {
   transition: all 0.5s ease;
   overflow-y: scroll;
   box-shadow: none;
+  opacity: 0.3;
 }
 
 .container.list-cont::-webkit-scrollbar {
@@ -223,6 +224,7 @@ li {
 .container.list-cont.active {
   z-index: 0;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  opacity: 1;
   transform: translateX(250px);
 }
 
